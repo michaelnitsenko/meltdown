@@ -2,6 +2,7 @@
 
 // global
 const soundInput = new SoundInput();
+const soundOutput = new SoundOutput();
 let canvas, c2d, analyser;
 
 function onLoad() {
