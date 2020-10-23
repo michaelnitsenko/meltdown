@@ -9,7 +9,7 @@ class SoundInput {
                 || window.webkitAudioContext; // Safari and old versions of Chrome
             const context = new AudioContext();
             const analyser = context.createAnalyser();
-            analyser.fftSize = 256;
+            analyser.fftSize = fftSize;
             console.log(analyser.maxDecibels, analyser.minDecibels)
             const source = context.createMediaStreamSource(stream);
             source.connect(analyser);

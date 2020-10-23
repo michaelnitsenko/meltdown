@@ -5,6 +5,14 @@ const soundInput = new SoundInput();
 const soundOutput = new SoundOutput();
 let canvas, c2d, analyser;
 
+const frequenciecReadIntervalMs = 80;
+
+const fftSize = 128;
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function onLoad() {
     canvas = document.createElement("canvas");
     canvas.width = 800;
@@ -13,21 +21,18 @@ function onLoad() {
 
     c2d = canvas.getContext("2d");
 
-    soundInput.startCapturing(function (soundInputAnalyser) {
+    soundInput.startCapturing(async function (soundInputAnalyser) {
         analyser = soundInputAnalyser;
-        // TODO: loop
-        readFrequesncies();
-        //
+        while (true) {
+            await sleep(frequenciecReadIntervalMs);
+            readFrequesncies();
+        }
     });
 
 }
 
+
 // Audio
-
-function indexHue(index) {
-    return (Math.log2(index) % 1) * 360; // coloring by octave 
-}
-
 function readFrequesncies() {
     const tds = new Uint8Array(analyser.fftSize);
     const freqs = new Uint8Array(analyser.frequencyBinCount);
@@ -41,7 +46,9 @@ function readFrequesncies() {
     var s = 0;
     for (let i = 0; i < analyser.frequencyBinCount; i++) {
         const v = freqs[i];
-        c2d.fillStyle = `hsl(${indexHue(i)}, 50%, 50%)`;
+
+        const color = `hsl(${256 - v}, 50%, 50%)`;
+        c2d.fillStyle = color;
         c2d.fillRect(i * 2, canvas.height - v, 2, v);
         s += v;
     }
