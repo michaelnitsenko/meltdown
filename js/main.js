@@ -34,7 +34,6 @@ function onLoad() {
 function sliderInput(value) {
     const image = document.getElementById('image');
     let _canvas = document.createElement("canvas");
-    _canvas.crossOrigin = "Anonymous";
     let _c2d = _canvas.getContext("2d");
     _c2d.drawImage(image, 0, 0);
     
