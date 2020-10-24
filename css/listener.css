@@ -8,23 +8,9 @@
     margin-left: 20%;
 }
 
-#startButton{
-    color: white;
-    background-color: lightseagreen;
-    width: 23%;
-    font-size: medium;
-}
 #stopButton{
     color: white;
     background-color: darkred;
     width: 23%;
     font-size: medium;
-}
-
-h2{
-    font-weight: 100;
-}
-
-body{
-    padding-top: 20px;
 }
