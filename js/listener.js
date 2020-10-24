@@ -7,6 +7,17 @@ let barsCanvas, imageCanvas, analyser;
 const frequenciecReadIntervalMs = 1;
 const fftSize = 8192;
 
+var stopped = false;
+
+function resume() {
+    stopped = false;
+}
+
+function stop() {
+    document.getElementById("startButton").onclick = resume;
+    stopped = true;
+}
+
 function onLoad() {
     barsCanvas = document.getElementById("barsCanvas");
     barsCanvas.width = fftSize/8;
@@ -29,9 +40,6 @@ function onLoad() {
             }
         }
     });
-
-    let uploader = document.getElementById("uploader");
-    uploader.addEventListener("change", setupFileLoader);
 }
 
 function HSLToRGBA(h,s,l) {
