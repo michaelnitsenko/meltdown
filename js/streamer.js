@@ -59,5 +59,5 @@ async function processImageData(imageData) {
         brightnessLines.push(brightnessLine);
     }
 
-    soundOutput.broadcastImageLine(brightnessLines);
+    soundOutput.broadcastImageLine(brightnessLines, 0.1);
 }
