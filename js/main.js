@@ -78,7 +78,7 @@ function setupFileLoader(event) {
     reader.readAsArrayBuffer(file);
 }
 
-function processImageData(imageData) {
+async function processImageData(imageData) {
     let width = imageData.widht;
     let height = imageData.height;
     let timeOffset = 0;
