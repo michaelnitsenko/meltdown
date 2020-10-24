@@ -46,40 +46,58 @@ function onLoad() {
         }
     });
 
+    let uploader = document.getElementById("uploader");
+    uploader.addEventListener("change", setupFileLoader);
 }
 
-function sliderInput(value) {
-    const image = document.getElementById('image');
-    let _canvas = document.createElement("canvas");
-    let _c2d = _canvas.getContext("2d");
-    _c2d.drawImage(image, 0, 0);
-    
-    let bitmap = _c2d.getImageData(0, 0, image.width, image.height);
-    let brightnessLines = [];
-    for (let i = 0; i < bitmap.height; i += 1) {
+// File
+
+function onFileIsLoaded(event){
+    let imageData = new Uint8Array(event.target.result);
+    console.log("works");
+    var blob = new Blob([imageData], {type: "image/png"});
+    var blobTempUrl = URL.createObjectURL(blob);
+    var element = document.getElementById("result_image");
+    element.onload = function() {
+        let _canvas = document.createElement("canvas");
+        _canvas.width = element.width;
+        _canvas.height = element.height;
+        let _c2d = _canvas.getContext("2d");
+        _c2d.drawImage(element, 0, 0);
+        let imageData = _c2d.getImageData(0, 0, element.width, element.height);
+        processImageData(imageData)
+    };
+
+    element.src = blobTempUrl;
+}
+
+function setupFileLoader(event) {
+    var file = this.files[0];
+    var reader = new FileReader();
+    reader.onload = onFileIsLoaded;
+    reader.readAsArrayBuffer(file);
+}
+
+function processImageData(imageData) {
+    let width = imageData.widht;
+    let height = imageData.height;
+    let timeOffset = 0;
+    for (let i = 0; i < height; i += 1) {
         let brightnessLine = [];
-        for (let j = 0; j < bitmap.width; j += 1) {
+        for (let j = 0; j < width; j += 1) {
             let brightness = 0;
             for (var rgba = 0; rgba < 4; rgba += 1) {
-                brightness += bitmap.data[i * bitmap.height + j + rgba];
+                brightness += imageData.data[i * height + j + rgba];
             }
                 
             brightnessLine.push(brightness);
         }
 
-        brightnessLines.push(brightnessLine);
+        await sleep(timeOffset)
+        soundOutput.broadcastImageLine(brightnessLine, 0.1);
+        
+        timeOffset += 10;
     }
-
-    console.log(brightnessLines[100]);
-
-
-    // var values = [];
-    // for (var i = 1; i < 20002; i += 100) {
-    //     values.push(i);
-    // }
-
-    // soundOutput.startProducingSound([value], 0.1);
-    // console.log(value);
 }
 
 function HSLToRGBA(h,s,l) {

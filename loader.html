@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<script src="lib/produce.js"></script>
 		<meta charset="utf-8"/>
 		<script>
 			function doSomethingOnFileIsLoaded(event){
@@ -44,4 +45,9 @@
 		var uploader = document.getElementById("uploader");
 		uploader.addEventListener("change", fileLoader)
 	</script>
+
+=======
+<body onload="onLoad()">
+    <input type="file" id="uploader" accept="image/*" />
+>>>>>>> Stashed changes
 </html>

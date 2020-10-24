@@ -9,8 +9,7 @@
             margin: 0;
         }
     </style>
-    <script src="js/capture.js"></script>
-    <script src="js/produce.js"></script>
+    <script src="lib/capture.js"></script>
     <script src="js/main.js"></script>
 </head>
 
@@ -25,6 +24,7 @@
     </div>
     <div><img id="image" src="./resources/maxresdefault.jpg"/></div>
     <div><input type="range" id="vol" name="vol" min="100" max="20000" step="50" onchange="sliderInput(this.value)"/></div>
+    <input type="file" id="uploader" accept="image/*" />
 </body>
 
 </html>
