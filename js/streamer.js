@@ -28,7 +28,7 @@ function onFileIsLoaded(event){
     var blobTempUrl = URL.createObjectURL(blob);
     var img = document.getElementById("image");
     img.onload = function() {
-        // TODO: UNHIDE BUTTON
+        document.getElementById("startButton").style.display = "inline";
     };
 
     img.src = blobTempUrl;
@@ -39,6 +39,13 @@ function onFileLoaderChange(event) {
     var reader = new FileReader();
     reader.onload = onFileIsLoaded;
     reader.readAsArrayBuffer(file);
+}
+
+function loadSample(event) {
+    var img = document.getElementById("image");
+    img.src = "images/sample.png";
+    
+    document.getElementById("startButton").style.display = "inline";
 }
 
 async function processImageData(imageData) {
