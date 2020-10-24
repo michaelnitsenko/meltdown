@@ -4,13 +4,40 @@
 		<title>Meltdown</title>
 		<script src="lib/produce.js"></script>
 		<script src="js/streamer.js"></script>
+
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/skeleton.css">
+		<link rel="stylesheet" href="css/streamer.css">
+
 	</head>
 	<body>
-		<input id="uploader" type="file" accept="image/*" onchange="onFileLoaderChange()" />
-		<button id="startButton" onclick="transmit()">
-			Start
-		</button>
-		<img id="image" />
+		<a href="index.html" id="mainPageLink">Main page</a>
+		
+		<div class="container">
+			<div class="row">
+				<div class="twelve columns" style="text-align: center;">
+					<h2>Image Soundifier</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="twelve columns uploader_class" style="text-align: center;">
+					<input id="uploader" class="custom-file-input" type="file" accept="image/*" onchange="onFileLoaderChange()" style=""/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="twelve columns" style="text-align: center;">
+					<img id="image" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="twelve columns" style="text-align: center;">
+					<button id="startButton" onclick="transmit()">
+						Start
+					</button>
+				</div>
+			</div>
+			
+		</div>
 		
 	</body>
 </html>
