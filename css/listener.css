@@ -21,7 +21,10 @@
     font-size: medium;
 }
 
-
 h2{
     font-weight: 100;
+}
+
+body{
+    padding-top: 20px;
 }

@@ -25,7 +25,7 @@
 - Media Queries
 */
 
-@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;1,300&display=swap);
 
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -421,6 +421,6 @@ there.
 #mainPageLink{
   color: black;
   position: absolute;
-  padding: 5px 15px;
+  padding: 0px 15px;
 }
 
