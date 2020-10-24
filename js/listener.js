@@ -1,5 +1,9 @@
 "use strict";
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 // global
 const soundInput = new SoundInput();
 let barsCanvas, imageCanvas, analyser;
