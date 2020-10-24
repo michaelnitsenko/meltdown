@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Meltdown</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+    <script src="lib/capture.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+    <div>
+    <button onclick="onLoad()" style="display: inline-block;" id="startButton">
+        Start
+    </button>
+    <button onclick="stop()" style="display: inline-block;">
+        Stop
+    </button>
+    </div>
+    <div><img id="image" src="./resources/maxresdefault.jpg"/></div>
+    <div><input type="range" id="vol" name="vol" min="100" max="20000" step="50" onchange="sliderInput(this.value)"/></div>
+    <input type="file" id="uploader" accept="image/*" />
+</body>
+
+</html>

@@ -1,30 +1,65 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Meltdown</title>
-    <meta charset="utf-8">
-    <style>
-        body {
-            margin: 0;
-        }
-    </style>
-    <script src="lib/capture.js"></script>
-    <script src="js/main.js"></script>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Meltdown</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/custom.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
 </head>
-
 <body>
-    <div>
-    <button onclick="onLoad()" style="display: inline-block;" id="startButton">
-        Start
-    </button>
-    <button onclick="stop()" style="display: inline-block;">
-        Stop
-    </button>
-    </div>
-    <div><img id="image" src="./resources/maxresdefault.jpg"/></div>
-    <div><input type="range" id="vol" name="vol" min="100" max="20000" step="50" onchange="sliderInput(this.value)"/></div>
-    <input type="file" id="uploader" accept="image/*" />
-</body>
 
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+      <div id="headings">
+        <h1>Meltdown</h1>
+        <p>by Mental breakdown</p>
+      </div>
+      
+    <div class="row">
+      <div class="one-half column tool tile" id="listener">
+        <a href="listener.html">Imagify sound</a>
+      </div>
+      <div class="one-half column tool tile" id="producer">
+        <a href="loader.html">Soundify image</a>
+      </div>
+    </div>
+    <div class="row">
+        <div class="twelve columns learn tile" id="learn">
+          <a href="learn.html">Learn wireless data transmission</a>
+        </div>
+      </div>
+    <div class="row">
+        <div class="twelve columns" id="github">
+            <img src="images/GitHub-Mark-64px.png" width="20px" style="vertical-align: sub;">
+            <a href="https://github.com/michaelnitsenko/meltdown">Find us on github</p>
+          </div>
+    </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
 </html>
