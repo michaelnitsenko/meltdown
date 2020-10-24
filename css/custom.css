@@ -1,0 +1,74 @@
+.tile {
+    background-color: cornflowerblue;
+    height: 150px;
+    margin-top: 20px;
+    font-weight: bold;
+    color: cornsilk;
+    /*box-shadow: 0px -5px 10px black inset;*/
+    background-size: cover;
+    text-shadow: 1px 1px 3px #000;
+    font-size: 150%;
+    -webkit-text-stroke: thin;
+    -webkit-text-stroke-color: black;
+    padding: 0 3%;
+
+    display: flex;
+    flex-direction: column;
+  justify-content: center;
+}
+
+.tile > a {
+    text-align: center;
+    color: cornsilk;
+    text-decoration: none;
+    display: block;
+}
+
+.tile > a:hover {
+    border-bottom-color: cornsilk;
+    border-bottom-width: medium;
+}
+
+
+#listener{
+    background-image: url(../images/Screenshot\ from\ 2020-10-24\ 12-23-32.png);
+}
+
+#producer{
+    background-image: url(../images/Screenshot\ from\ 2020-10-24\ 12-40-42.png);
+}
+
+#learn{
+    background-image: url(../images/Screenshot\ from\ 2020-10-24\ 12-51-21.png);
+}
+
+
+#headings {
+    margin-top: 10%;
+    margin-left: 5%;
+    margin-bottom: 40px;
+}
+
+#headings > p {
+    margin-left: 5px;
+    font-size: small;
+}
+
+#headings > h1 {
+    margin-bottom: 5px;
+}
+
+#github {
+    text-align: center;
+    margin-top: 40px;
+}
+
+#github > a{
+    text-decoration: none;
+    color: black;
+    line-height: 20px;
+}
+
+#github > a:hover {
+    text-decoration: underline;
+}
