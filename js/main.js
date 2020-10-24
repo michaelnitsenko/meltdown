@@ -4,7 +4,18 @@
 const soundInput = new SoundInput();
 let barsCanvas, imageCanvas, analyser;
 
-const frequenciecReadIntervalMs = 10;
+var stopped = false;
+
+function resume() {
+    stopped = false;
+}
+
+function stop() {
+    document.getElementById("startButton").onclick = resume;
+    stopped = true;
+}
+
+const frequenciecReadIntervalMs = 1;
 const fftSize = 8192;
 
 function sleep(ms) {
@@ -13,14 +24,14 @@ function sleep(ms) {
 
 function onLoad() {
     barsCanvas = document.createElement("canvas");
-    barsCanvas.width = 800;
+    barsCanvas.width = fftSize/8;
     barsCanvas.height = 256;
 
     document.body.appendChild(barsCanvas);
 
     imageCanvas = document.createElement("canvas");
-    imageCanvas.width = 800;
-    imageCanvas.height = 256;
+    imageCanvas.width = fftSize/8;
+    imageCanvas.height = 800;
 
     document.body.appendChild(imageCanvas);
 
@@ -28,7 +39,9 @@ function onLoad() {
         analyser = soundInputAnalyser;
         while (true) {
             await sleep(frequenciecReadIntervalMs);
-            readFrequesncies();
+            if (!stopped) {
+                readFrequesncies();
+            }
         }
     });
 
@@ -72,13 +85,8 @@ function HSLToRGBA(h,s,l) {
 function splicearrays(arr1, arr2) {
     var clampedArray = new Uint8ClampedArray(arr1.length*4 + arr2.length);
 
-    for (let i = 0; i < arr1.length; i+=4) {
-        var rgba = HSLToRGBA(arr1[i], 0.5, 0.5);
-
-        clampedArray[i] = rgba[0];
-        clampedArray[i+1] = rgba[1];
-        clampedArray[i+2] = rgba[2];
-        clampedArray[i+3] = rgba[3];
+    for (let i = 0; i < arr1.length; i++) {
+        clampedArray[i] = arr1[i];
     }
 
     for (let i = arr1.length; i < clampedArray.length; i++) {
@@ -153,7 +161,7 @@ function readFrequesncies() {
 
         // imageData = imageCanvasContext.createImageData(imageData);
         // console.log(clampedArray);
-        imageCanvasContext.putImageData(imageData, 0, 1);
+        imageCanvasContext.putImageData(imageData, 0, 0);
 
         barsCanvasContext.restore();
 
