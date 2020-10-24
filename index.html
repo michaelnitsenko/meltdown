@@ -14,7 +14,15 @@
     <script src="js/main.js"></script>
 </head>
 
-<body onload="onLoad()">
+<body>
+    <div>
+    <button onclick="onLoad()" style="display: inline-block;" id="startButton">
+        Start
+    </button>
+    <button onclick="stop()" style="display: inline-block;">
+        Stop
+    </button>
+    </div>
     <div><img id="image" src="./resources/maxresdefault.jpg"/></div>
     <div><input type="range" id="vol" name="vol" min="100" max="20000" step="50" onchange="sliderInput(this.value)"/></div>
 </body>
