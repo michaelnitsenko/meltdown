@@ -41,8 +41,7 @@ async function processImageData(imageData) {
 
     let width = imageData.width;
     let height = imageData.height;
-    let timeOffset = 0;
-    let timeStep = 200;
+    let brightnessLines = [];
 
     for (let i = 0; i < height; i += 1) {
         let brightnessLine = [];
@@ -50,18 +49,15 @@ async function processImageData(imageData) {
         for (let j = 0; j < width; j += 1) {
             let brightness = 0;
 
-
-            for (let rgba = 0; rgba < 3; rgba += 1) {
-                brightness += imageData.data[i * height + j * 4 + rgba];
-            }
+            brightness += 0.299 * imageData.data[i * height + j * 4 + 0] / 255;
+            brightness += 0.587 * imageData.data[i * height + j * 4 + 1] / 255;
+            brightness += 0.114 * imageData.data[i * height + j * 4 + 2] / 255;
                 
-            brightnessLine.push(brightness / (3 * 255));
+            brightnessLine.push(brightness);
         }
 
-        console.log(brightnessLine);
-        await sleep(timeStep);
-        soundOutput.broadcastImageLine(brightnessLine, timeStep / 1000);
-        
-        timeOffset += timeStep;
+        brightnessLines.push(brightnessLine);
     }
+
+    soundOutput.broadcastImageLine(brightnessLines);
 }
