@@ -4,6 +4,8 @@
 const soundInput = new SoundInput();
 let barsCanvas, imageCanvas, analyser;
 
+const frequenciecReadIntervalMs = 1;
+const fftSize = 8192;
 
 var stopped = false;
 
@@ -16,21 +18,14 @@ function stop() {
     stopped = true;
 }
 
-const frequenciecReadIntervalMs = 1;
-const fftSize = 8192;
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 function onLoad() {
-    barsCanvas = document.createElement("canvas");
+    barsCanvas = document.getElementById("barsCanvas");
     barsCanvas.width = fftSize/8;
     barsCanvas.height = 256;
 
     document.body.appendChild(barsCanvas);
 
-    imageCanvas = document.createElement("canvas");
+    imageCanvas = document.getElementById("waterfallCanvas");
     imageCanvas.width = fftSize/8;
     imageCanvas.height = 800;
 
@@ -45,59 +40,6 @@ function onLoad() {
             }
         }
     });
-
-    let uploader = document.getElementById("uploader");
-    uploader.addEventListener("change", setupFileLoader);
-}
-
-// File
-
-function onFileIsLoaded(event){
-    let imageData = new Uint8Array(event.target.result);
-    console.log("works");
-    var blob = new Blob([imageData], {type: "image/png"});
-    var blobTempUrl = URL.createObjectURL(blob);
-    var element = document.getElementById("result_image");
-    element.onload = function() {
-        let _canvas = document.createElement("canvas");
-        _canvas.width = element.width;
-        _canvas.height = element.height;
-        let _c2d = _canvas.getContext("2d");
-        _c2d.drawImage(element, 0, 0);
-        let imageData = _c2d.getImageData(0, 0, element.width, element.height);
-        processImageData(imageData)
-    };
-
-    element.src = blobTempUrl;
-}
-
-function setupFileLoader(event) {
-    var file = this.files[0];
-    var reader = new FileReader();
-    reader.onload = onFileIsLoaded;
-    reader.readAsArrayBuffer(file);
-}
-
-async function processImageData(imageData) {
-    let width = imageData.widht;
-    let height = imageData.height;
-    let timeOffset = 0;
-    for (let i = 0; i < height; i += 1) {
-        let brightnessLine = [];
-        for (let j = 0; j < width; j += 1) {
-            let brightness = 0;
-            for (var rgba = 0; rgba < 4; rgba += 1) {
-                brightness += imageData.data[i * height + j + rgba];
-            }
-                
-            brightnessLine.push(brightness);
-        }
-
-        await sleep(timeOffset)
-        soundOutput.broadcastImageLine(brightnessLine, 0.1);
-        
-        timeOffset += 10;
-    }
 }
 
 function HSLToRGBA(h,s,l) {
@@ -192,7 +134,6 @@ function readFrequesncies() {
 
     {
         var imageCanvasContext = imageCanvas.getContext("2d");
-        imageCanvasContext.save();
 
         var currentImageData = imageCanvasContext.getImageData(0, 0, freqs.length, imageCanvas.height);
         var currentImageData = imageCanvasContext.putImageData(currentImageData, 0, 1);
@@ -204,18 +145,9 @@ function readFrequesncies() {
         var resultHeight = clampedArray.length/4/freqs.length;
         var resultWidth = freqs.length;
 
-        // console.log(currentImageData.data.length);
-        // console.log(clampedArray.length);
-        // console.log(freqs.length);
-        // console.log(resultHeight, resultWidth)
         var imageData = new ImageData(clampedArray, resultWidth, resultHeight);
     
-
-        // imageData = imageCanvasContext.createImageData(imageData);
-        // console.log(clampedArray);
         imageCanvasContext.putImageData(imageData, 0, 0);
-
-        barsCanvasContext.restore();
 
     }
 }
