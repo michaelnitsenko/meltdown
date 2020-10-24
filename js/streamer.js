@@ -29,7 +29,6 @@ function onFileIsLoaded(event){
 }
 
 function onFileLoaderChange(event) {
-    console.log(event);
     var file = document.getElementById("uploader").files[0];
     var reader = new FileReader();
     reader.onload = onFileIsLoaded;
@@ -37,23 +36,32 @@ function onFileLoaderChange(event) {
 }
 
 async function processImageData(imageData) {
-    let width = imageData.widht;
+
+    //[0, 1, 2, 3, 4, 5, 6, 7]
+
+    let width = imageData.width;
     let height = imageData.height;
     let timeOffset = 0;
+    let timeStep = 200;
+
     for (let i = 0; i < height; i += 1) {
         let brightnessLine = [];
+
         for (let j = 0; j < width; j += 1) {
             let brightness = 0;
-            for (var rgba = 0; rgba < 4; rgba += 1) {
-                brightness += imageData.data[i * height + j + rgba];
+
+
+            for (let rgba = 0; rgba < 3; rgba += 1) {
+                brightness += imageData.data[i * height + j * 4 + rgba];
             }
                 
-            brightnessLine.push(brightness);
+            brightnessLine.push(brightness / (3 * 255));
         }
 
-        await sleep(timeOffset)
-        soundOutput.broadcastImageLine(brightnessLine, 0.1);
+        console.log(brightnessLine);
+        await sleep(timeStep);
+        soundOutput.broadcastImageLine(brightnessLine, timeStep / 1000);
         
-        timeOffset += 10;
+        timeOffset += timeStep;
     }
 }
