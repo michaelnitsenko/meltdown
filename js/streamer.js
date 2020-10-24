@@ -9,7 +9,7 @@ const soundOutput = new SoundOutput();
 let uploader;
 
 function transmit() {
-    var img = document.getElementById("image");
+    var img = document.getElementById("_image");
     let _canvas = document.createElement("canvas");
     _canvas.width = img.width;
     _canvas.height = img.height;
@@ -27,11 +27,13 @@ function onFileIsLoaded(event){
     var blob = new Blob([imageData], {type: "image/png"});
     var blobTempUrl = URL.createObjectURL(blob);
     var img = document.getElementById("image");
+    var _img = document.getElementById("_image");
     img.onload = function() {
         document.getElementById("startButton").style.display = "inline";
     };
 
     img.src = blobTempUrl;
+    _img.src = blobTempUrl;
 }
 
 function onFileLoaderChange(event) {
