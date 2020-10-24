@@ -4,6 +4,7 @@
 const soundInput = new SoundInput();
 let barsCanvas, imageCanvas, analyser;
 
+
 var stopped = false;
 
 function resume() {
@@ -47,6 +48,39 @@ function onLoad() {
 
 }
 
+function sliderInput(value) {
+    const image = document.getElementById('image');
+    let _canvas = document.createElement("canvas");
+    let _c2d = _canvas.getContext("2d");
+    _c2d.drawImage(image, 0, 0);
+    
+    let bitmap = _c2d.getImageData(0, 0, image.width, image.height);
+    let brightnessLines = [];
+    for (let i = 0; i < bitmap.height; i += 1) {
+        let brightnessLine = [];
+        for (let j = 0; j < bitmap.width; j += 1) {
+            let brightness = 0;
+            for (var rgba = 0; rgba < 4; rgba += 1) {
+                brightness += bitmap.data[i * bitmap.height + j + rgba];
+            }
+                
+            brightnessLine.push(brightness);
+        }
+
+        brightnessLines.push(brightnessLine);
+    }
+
+    console.log(brightnessLines[100]);
+
+
+    // var values = [];
+    // for (var i = 1; i < 20002; i += 100) {
+    //     values.push(i);
+    // }
+
+    // soundOutput.startProducingSound([value], 0.1);
+    // console.log(value);
+}
 
 function HSLToRGBA(h,s,l) {
     // Must be fractions of 1
