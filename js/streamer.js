@@ -10,6 +10,8 @@ function transmit() {
     _canvas.width = img.width;
     _canvas.height = img.height;
     let _c2d = _canvas.getContext("2d");
+    _c2d.translate(0, img.height);
+    _c2d.scale(1, -1);
     _c2d.drawImage(img, 0, 0);
     let imageData = _c2d.getImageData(0, 0, img.width, img.height);
     processImageData(imageData);
@@ -56,5 +58,5 @@ async function processImageData(imageData) {
         brightnessLines.push(brightnessLine);
     }
 
-    soundOutput.broadcastImageLine(brightnessLines, 1);
+    soundOutput.broadcastImageLine(brightnessLines, 0.1);
 }
