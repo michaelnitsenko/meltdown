@@ -3,28 +3,51 @@
 
 <head>
     <title>Meltdown</title>
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/listener.css">
+
     <meta charset="utf-8">
-    <style>
-        body {
-            margin: 0;
-        }
-    </style>
+
     <script src="lib/capture.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/listener.js"></script>
 </head>
 
 <body>
-    <div>
-    <button onclick="onLoad()" style="display: inline-block;" id="startButton">
-        Start
-    </button>
-    <button onclick="stop()" style="display: inline-block;">
-        Stop
-    </button>
+    <div class="container">
+        <div class="row">
+            <div class="twelve columns" style="text-align: center;">
+                <h2>Sound imagifier</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns" style="text-align: center;">
+                <button onclick="onLoad()" style="display: inline-block;" id="startButton">
+                    Start
+                </button>
+                <button onclick="stop()" style="display: inline-block;" id="stopButton">
+                    Stop
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="twelve columns" style="text-align: center;">
+                <canvas id="barsCanvas" style="display: block;"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="twelve columns" style="text-align: center;">
+                <canvas id="waterfallCanvas" style="display: block;"></canvas>
+            </div>
+        </div>
+        
+        
+
     </div>
-    <div><img id="image" src="./resources/maxresdefault.jpg"/></div>
-    <div><input type="range" id="vol" name="vol" min="100" max="20000" step="50" onchange="sliderInput(this.value)"/></div>
-    <input type="file" id="uploader" accept="image/*" />
 </body>
 
 </html>
