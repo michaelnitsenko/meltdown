@@ -21,7 +21,19 @@
 			</div>
 			<div class="row">
 				<div class="twelve columns uploader_class" style="text-align: center;">
-					<input id="uploader" class="custom-file-input" type="file" accept="image/*" onchange="onFileLoaderChange()" style=""/>
+					<a href="images/sample.png" download="w3logo" style="color: black;">
+						Download a demo image
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="twelve columns" style="text-align: center;">
+					Or select you own image:
+				</div>
+			</div>
+			<div class="row">
+				<div class="twelve columns" style="text-align: center;">
+					<input id="uploader" class="custom-file-input" type="file" accept="image/*" onchange="onFileLoaderChange()" />
 				</div>
 			</div>
 			<div class="row">
@@ -31,7 +43,7 @@
 			</div>
 			<div class="row">
 				<div class="twelve columns" style="text-align: center;">
-					<button id="startButton" onclick="transmit()">
+					<button id="startButton" onclick="transmit()" style="display: none;">
 						Start
 					</button>
 				</div>
